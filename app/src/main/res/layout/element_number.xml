@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/llNumber"
+    android:layout_width="100dp"
+    android:layout_height="100dp"
+    android:background="@drawable/custom_number"
+    android:orientation="vertical"
+    android:padding="10dp">
+
+    <TextView
+        android:id="@+id/txtNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:fontFamily="@font/montserratregular"
+        android:gravity="center"
+        android:text="9"
+        android:textColor="@color/white"
+        android:textSize="60dp" />
+</LinearLayout>

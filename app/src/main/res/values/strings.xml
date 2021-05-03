@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">SuperFiit</string>
+    <string name="mybody">My body</string>
+    <string name="lastexercises">Last exercises</string>
+    <string name="plank">Plank</string>
+    <string name="invalid_name">Please enter valid name</string>
+    <string name="invalid_email">Please enter valid email</string>
+    <string name="invalid_password">Please enter valid code</string>
+    <string name="invalid_confirm_password">Code does not much</string>
+</resources>

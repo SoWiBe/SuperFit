@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="320dp"
+    android:layout_height="300dp"
+    android:background="#424242"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="15dp"
+        android:fontFamily="@font/robotobold"
+        android:text="Permissions"
+        android:textColor="#ffffff"
+        android:textSize="28dp" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:fontFamily="@font/robotoregular"
+        android:text="Lorem ipsum dolor sit amet, \nconsectetur adipisicing elit, sed \ndo eiusmod tempor incididunt ut
+        \nlabore et dolore magna wirl \naliqua. Up exlaborum incididunt \nquis nostrud exercitatn."
+        android:textColor="#949494"
+        android:textSize="20dp" />
+
+    <LinearLayout
+        android:layout_width="236dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnCancel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="#00FFFFFF"
+            android:text="Close"
+            android:textColor=" #B461F5"
+            android:textSize="16sp" />
+
+        <Button
+            android:id="@+id/btnYes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="#00FFFFFF"
+            android:text="Yes"
+            android:textColor=" #B461F5"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+</LinearLayout>
