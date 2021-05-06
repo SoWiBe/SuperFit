@@ -10,6 +10,16 @@ public class RecipesElement implements Serializable {
     private String fat;
     private String cards;
     private String image;
+    private String query;
+
+    public String getQuery() {
+        return query;
+    }
+
+    public void setQuery(String quary) {
+        this.query = quary;
+    }
+
     private ArrayList<String> ingredients;
 
     public RecipesElement(){}

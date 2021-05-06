@@ -67,8 +67,7 @@ public class RecipesActivity extends AppCompatActivity {
         recipesElements = new ArrayList<>();
         ingredientsList = new ArrayList<>();
 
-        myRecyclerAdapter = new MyRecyclerAdapter(this, recipesElements);
-        myRecyclerAdapter.notifyDataSetChanged();
+
         LinearLayoutManager llm = new LinearLayoutManager(this);
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(llm);
@@ -85,6 +84,10 @@ public class RecipesActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         Parsing(data);
+                        Log.d("Check ingredient", "check ingredient: " + recipesElements.get(0).getIngredients());
+                        Log.d("Result size", "result size: " + recipesElements.get(0).getIngredients().size());
+                        myRecyclerAdapter = new MyRecyclerAdapter(RecipesActivity.this, recipesElements);
+                        myRecyclerAdapter.notifyDataSetChanged();
                         recyclerView.setAdapter(myRecyclerAdapter);
                     }
                 });
@@ -122,7 +125,6 @@ public class RecipesActivity extends AppCompatActivity {
                 });
                 return false;
             }
-
             @Override
             public boolean onQueryTextChange(String newText) {
                 return false;
@@ -176,27 +178,25 @@ public class RecipesActivity extends AppCompatActivity {
                 JSONObject cardsObject = (JSONObject) totalNutrients.get("CHOCDF");
                 String cardsValue = cardsObject.get("quantity").toString();
 
-
                 org.json.simple.JSONArray ingredientLines = (JSONArray) recipeObject.get("ingredientLines");
                 for(Object ing : ingredientLines){
+                    ingredientsList.clear();
                     ingredientsList.add(ing.toString());
                 }
-
                 RecipesElement recipesElement = new RecipesElement();
                 recipesElement.setName(label);
                 recipesElement.setKcal(String.valueOf(Math.round(Double.parseDouble(calories))) + " kcal ");
                 recipesElement.setProtein(String.valueOf(Math.round(Double.parseDouble(proteinsValue))) + "g protein");
                 recipesElement.setCards(String.valueOf(Math.round(Double.parseDouble(cardsValue))) + "g carbs");
                 recipesElement.setFat(String.valueOf(Math.round(Double.parseDouble(fastValue))) + "g fat");
+                recipesElement.setQuery(productName);
                 recipesElement.setIngredients(ingredientsList);
-                Log.d("mLog", "onCreate: " +
-                ingredientsList.size());
+                Log.d("mLog", "Size: " +
+                    ingredientsList.size());
                 recipesElement.setImage(image);
-
-
-
+                Log.d("Check ingredient", "check ingredient before: " + ingredientsList.get(0));
+                Log.d("Result size", "result size before: " + ingredientsList.size());
                 recipesElements.add(recipesElement);
-                ingredientsList.clear();
             }
         } catch (Exception e){
             e.printStackTrace();

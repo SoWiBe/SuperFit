@@ -2,6 +2,7 @@ package com.example.superfiit;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -55,7 +56,7 @@ public class MyRecyclerAdapter  extends RecyclerView.Adapter<MyRecyclerAdapter.M
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, RecipeScreen.class);
-                intent.putExtra("recipe", recipesElements.get(position));
+                intent.putExtra("recipe", recipesElement);
                 context.startActivity(intent);
             }
         });

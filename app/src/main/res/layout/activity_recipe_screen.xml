@@ -98,7 +98,15 @@
             android:textColor="#000000"
             android:textSize="16sp"
             android:textStyle="bold" />
+        <ListView
+            android:id="@+id/mainListViewIngredient"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp"
+            android:layout_below="@id/txtIngredients"/>
 
     </LinearLayout>
+
+
 
 </RelativeLayout>
