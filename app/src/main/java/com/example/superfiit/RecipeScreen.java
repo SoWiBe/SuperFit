@@ -77,7 +77,9 @@ public class RecipeScreen extends AppCompatActivity {
         StringBuilder result = new StringBuilder();
         try{
             connection =
-                    (HttpURLConnection) new URL("https://api.edamam.com/search?q="+ recipesElement.getQuery() + "&app_id=4da5a427&app_key=6dd6f99730da1737e964379d886e607d&diet=high-protein").openConnection();
+                    (HttpURLConnection) new URL("https://api.edamam.com/search?q="+ recipesElement.getQuery() +
+                            "&app_id=4da5a427&app_key=6dd6f99730da1737e964379d886e607d&diet=" + recipesElement.getDiet())
+                            .openConnection();
             connection.setRequestMethod("GET");
             connection.connect();
             if(HttpURLConnection.HTTP_OK == connection.getResponseCode()){
@@ -117,9 +119,6 @@ public class RecipeScreen extends AppCompatActivity {
                     }
                     Log.d("Size", "Ingredient list size is: " + ingredientslist.size());
                 }
-
-
-
             }
         } catch (Exception e){
             e.printStackTrace();

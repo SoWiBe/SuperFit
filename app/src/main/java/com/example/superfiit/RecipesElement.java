@@ -11,6 +11,15 @@ public class RecipesElement implements Serializable {
     private String cards;
     private String image;
     private String query;
+    private String diet;
+
+    public String getDiet() {
+        return diet;
+    }
+
+    public void setDiet(String diet) {
+        this.diet = diet;
+    }
 
     public String getQuery() {
         return query;

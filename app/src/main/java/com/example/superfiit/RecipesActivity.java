@@ -18,6 +18,8 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.SearchView;
 import android.widget.Toast;
 
@@ -49,6 +51,9 @@ public class RecipesActivity extends AppCompatActivity {
     private SearchView searchView;
     private String productName = "chicken";
     private ArrayList<String> ingredientsList;
+    private RadioGroup rgButtons;
+    private RadioButton rbBalanced, rbHighFiber, rbHighProtein;
+    private String typeOfDiet = "balanced";
 
 
     private HttpURLConnection connection = null;
@@ -63,36 +68,51 @@ public class RecipesActivity extends AppCompatActivity {
         imgRecipeBackToHome = findViewById(R.id.imgRecipeBackToHome);
         searchView = findViewById(R.id.edtSearch);
 
+        rgButtons = findViewById(R.id.rgMain);
+        rbBalanced = findViewById(R.id.rbBalanced);
+        rbHighFiber = findViewById(R.id.rgHighFiber);
+        rbHighProtein = findViewById(R.id.rbHighProtein);
+
+
+        rbBalanced.setOnClickListener(radioButtonClickListener);
+        rbHighProtein.setOnClickListener(radioButtonClickListener);
+        rbHighFiber.setOnClickListener(radioButtonClickListener);
+        rbBalanced.setClickable(true);
+
 
         recipesElements = new ArrayList<>();
         ingredientsList = new ArrayList<>();
+        myRecyclerAdapter = new MyRecyclerAdapter(RecipesActivity.this, recipesElements);
+
 
 
         LinearLayoutManager llm = new LinearLayoutManager(this);
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(llm);
-
+        recyclerView.setAdapter(myRecyclerAdapter);
         AsyncTask.execute(new Runnable() {
             @Override
             public void run() {
                 try{
-                    data = GetDownloadData();
+                    data = GetDownloadData(typeOfDiet);
                 } catch (Exception e){
                     e.printStackTrace();
                 }
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
+                        recipesElements.clear();
                         Parsing(data);
-                        Log.d("Check ingredient", "check ingredient: " + recipesElements.get(0).getIngredients());
-                        Log.d("Result size", "result size: " + recipesElements.get(0).getIngredients().size());
-                        myRecyclerAdapter = new MyRecyclerAdapter(RecipesActivity.this, recipesElements);
                         myRecyclerAdapter.notifyDataSetChanged();
                         recyclerView.setAdapter(myRecyclerAdapter);
                     }
                 });
             }
         });
+
+
+
+
         imgRecipeBackToHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -110,14 +130,16 @@ public class RecipesActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         try{
-                            data = GetDownloadData();
+                            data = GetDownloadData(typeOfDiet);
                         } catch (Exception e){
                             e.printStackTrace();
                         }
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
+                                recipesElements.clear();
                                 Parsing(data);
+                                myRecyclerAdapter.notifyDataSetChanged();
                                 recyclerView.setAdapter(myRecyclerAdapter);
                             }
                         });
@@ -133,12 +155,46 @@ public class RecipesActivity extends AppCompatActivity {
 
 
     }
+    View.OnClickListener radioButtonClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            RadioButton radioButton = (RadioButton) v;
+            switch (radioButton.getId()){
+                case R.id.rgHighFiber:
+                    typeOfDiet = "high-fiber";
+                    break;
+                case R.id.rbHighProtein:
+                    typeOfDiet = "high-protein";
+                    break;
+                default:
+                    typeOfDiet = "balanced";
+            }
+            AsyncTask.execute(new Runnable() {
+                @Override
+                public void run() {
+                    try{
+                        data = GetDownloadData(typeOfDiet);
+                    } catch (Exception e){
+                        e.printStackTrace();
+                    }
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            recipesElements.clear();
+                            Parsing(data);
+                            myRecyclerAdapter.notifyDataSetChanged();
+                        }
+                    });
+                }
+            });
+        }
+    };
 
-    private String GetDownloadData(){
+    private String GetDownloadData(String type){
         StringBuilder result = new StringBuilder();
         try{
             connection =
-                    (HttpURLConnection) new URL("https://api.edamam.com/search?q="+ productName + "&app_id=4da5a427&app_key=6dd6f99730da1737e964379d886e607d&diet=high-protein").openConnection();
+                    (HttpURLConnection) new URL("https://api.edamam.com/search?q="+ productName + "&app_id=4da5a427&app_key=6dd6f99730da1737e964379d886e607d&diet=" + type).openConnection();
             connection.setRequestMethod("GET");
             connection.connect();
             if(HttpURLConnection.HTTP_OK == connection.getResponseCode()){
@@ -191,6 +247,7 @@ public class RecipesActivity extends AppCompatActivity {
                 recipesElement.setFat(String.valueOf(Math.round(Double.parseDouble(fastValue))) + "g fat");
                 recipesElement.setQuery(productName);
                 recipesElement.setIngredients(ingredientsList);
+                recipesElement.setDiet(typeOfDiet);
                 Log.d("mLog", "Size: " +
                     ingredientsList.size());
                 recipesElement.setImage(image);
