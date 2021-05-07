@@ -10,8 +10,12 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -34,14 +38,18 @@ public class RecipeScreen extends AppCompatActivity {
     private String data;
     private IngredientAdapter ingredientAdapter;
     private ListView lvIngredients;
+    private ImageView imgBackContent;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipe_screen);
         txtKcal = findViewById(R.id.txtKcal);
         txtTitle = findViewById(R.id.txtTitle);
+
         lvIngredients = findViewById(R.id.mainListViewIngredient);
         txtAllImpact = findViewById(R.id.txtProteinFatCards);
+        imgBackContent = findViewById(R.id.imgBackContent);
 
         ingredientslist = new ArrayList<>();
         bundle = getIntent().getExtras();
@@ -51,6 +59,8 @@ public class RecipeScreen extends AppCompatActivity {
             txtKcal.setText(recipesElement.getKcal());
             txtAllImpact.setText(recipesElement.getProtein() + " • " + recipesElement.getFat() + " • " + recipesElement.getCards());
             txtTitle.setText(recipesElement.getName());
+            Picasso.with(this).load(recipesElement.getImage()).into(imgBackContent);
+
             AsyncTask.execute(new Runnable() {
                 @Override
                 public void run() {
