@@ -1,6 +1,7 @@
 package com.example.superfiit;
 
 import androidx.annotation.LongDef;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -12,9 +13,11 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -206,6 +209,10 @@ public class RecipesActivity extends AppCompatActivity {
                 }
             }
         } catch (Exception e){
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle("Error");
+            AlertDialog alertDialog = builder.create();
+            alertDialog.show();
             e.printStackTrace();
         }
         if(connection != null){
@@ -256,6 +263,26 @@ public class RecipesActivity extends AppCompatActivity {
                 recipesElements.add(recipesElement);
             }
         } catch (Exception e){
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            LayoutInflater layoutInflater = this.getLayoutInflater();
+            View view = layoutInflater.inflate(R.layout.dialog_activity, null);
+            builder.setView(view);
+            AlertDialog alertDialog = builder.create();
+            Button btnClose = view.findViewById(R.id.btnCancel);
+            Button btnOk = view.findViewById(R.id.btnYes);
+            btnClose.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    alertDialog.cancel();
+                }
+            });
+            btnOk.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    alertDialog.cancel();
+                }
+            });
+            alertDialog.show();
             e.printStackTrace();
         }
     }
