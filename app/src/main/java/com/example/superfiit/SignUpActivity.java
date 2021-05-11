@@ -17,6 +17,7 @@ import android.widget.Toast;
 import com.basgeekball.awesomevalidation.AwesomeValidation;
 import com.basgeekball.awesomevalidation.ValidationStyle;
 import com.basgeekball.awesomevalidation.utility.RegexTemplate;
+import com.example.mylibrary.DBHelper;
 
 public class SignUpActivity extends AppCompatActivity {
 
@@ -24,6 +25,7 @@ public class SignUpActivity extends AppCompatActivity {
     private AwesomeValidation awesomeValidation;
 
     private DBHelper dbHelper;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

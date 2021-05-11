@@ -11,6 +11,8 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.mylibrary.DBHelper;
+
 public class AuthorizationActivity extends AppCompatActivity {
 
     private DBHelper dbHelper;
@@ -22,7 +24,6 @@ public class AuthorizationActivity extends AppCompatActivity {
 
         dbHelper = new DBHelper(this);
         edtName = findViewById(R.id.edtUserNameAuthorization);
-
 
     }
 

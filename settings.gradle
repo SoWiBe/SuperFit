@@ -1,2 +1,4 @@
+include ':mylibrary'
+include ':watchsuperfit'
 include ':app'
 rootProject.name = "SuperFiit"

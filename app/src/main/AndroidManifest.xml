@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.superfiit">
+    package="com.example.superfiit"
+    >
     <uses-permission android:name="android.permission.INTERNET"/>
+
+
+
 
 
     <application
@@ -11,6 +15,7 @@
         android:usesCleartextTraffic="true"
         android:roundIcon="@drawable/appicon"
         android:supportsRtl="true"
+
         android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
         <activity android:name=".RecipeScreen"></activity>
         <activity android:name=".RecipesActivity" />
