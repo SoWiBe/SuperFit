@@ -49,9 +49,9 @@
             android:layout_gravity="center"
             android:layout_margin="25dp"
             android:cacheColorHint="@color/white"
-            android:horizontalSpacing="30dp"
+            android:horizontalSpacing="10dp"
             android:numColumns="3"
-            android:verticalSpacing="30dp" />
+            android:verticalSpacing="10dp" />
 
     </LinearLayout>
 

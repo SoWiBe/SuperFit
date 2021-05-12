@@ -13,7 +13,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Design.Light.NoActionBar">
-        <activity android:name=".LoginActivity"></activity>
+        <activity android:name=".ExcellentActivity"></activity>
+        <activity android:name=".PasswordActivity" />
+        <activity android:name=".ChronometrActivity" />
+        <activity android:name=".PlankActivity" />
+        <activity android:name=".LoginActivity" />
 
         <uses-library
             android:name="com.google.android.wearable"

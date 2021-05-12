@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/llNumber"
-    android:layout_width="100dp"
-    android:layout_height="100dp"
-    android:background="@drawable/custom_number"
+    android:layout_width="40dp"
+    android:layout_height="40dp"
+    android:background="@drawable/rectangle_24__1_"
     android:orientation="vertical">
 
     <TextView
@@ -15,5 +15,5 @@
         android:text="9"
         android:gravity="center"
         android:textColor="@color/white"
-        android:textSize="60dp" />
+        android:textSize="30dp" />
 </LinearLayout>

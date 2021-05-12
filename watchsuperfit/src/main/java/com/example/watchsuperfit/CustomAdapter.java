@@ -1,4 +1,4 @@
-package com.example.superfiit;
+package com.example.watchsuperfit;
 
 import android.content.Context;
 import android.content.Intent;
@@ -8,7 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -16,12 +15,12 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class CustomAdapter extends BaseAdapter {
-
     private ArrayList<String> numbers;
     private LayoutInflater layoutInflater;
     private Context context;
 
     private String code, createCode = "";
+
     private int countClicks = 4;
 
     public CustomAdapter(ArrayList<String> numbers, Context context, String code) {
@@ -29,6 +28,12 @@ public class CustomAdapter extends BaseAdapter {
         this.layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         this.context = context;
         this.code = code;
+    }
+    public CustomAdapter(ArrayList<String> numbers, Context context) {
+        this.numbers = numbers;
+        this.layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        this.context = context;
+        this.code = "1234";
     }
 
     @Override
@@ -47,7 +52,7 @@ public class CustomAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         View view = convertView;
         if(convertView == null){
             view = layoutInflater.inflate(R.layout.element_number, parent, false);
@@ -63,7 +68,7 @@ public class CustomAdapter extends BaseAdapter {
                 Log.d("CreatedCode", "Code: " + createCode + "||Code: " + code);
                 if(countClicks == 0){
                     if(code.toLowerCase().equals(createCode)){
-                        Intent intent = new Intent(context, HomeActivity.class);
+                        Intent intent = new Intent(context, PlankActivity.class);
                         context.startActivity(intent);
                     } else{
                         createCode = "";
