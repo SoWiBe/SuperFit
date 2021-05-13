@@ -34,15 +34,21 @@ public class AuthorizationActivity extends AppCompatActivity {
         Intent SignInIntent = new Intent(this, SignInActivity.class);
         Cursor cursor = database.rawQuery("Select * From " + DBHelper.TABLE_USERS + " Where " + DBHelper.KEY_NAME + "='" + name+"'", null);
         if(cursor.getCount() != 0){
-
             if (cursor.moveToFirst()) {
                 int emailIndex = cursor.getColumnIndex(DBHelper.KEY_MAIL);
                 int codeIndex = cursor.getColumnIndex(DBHelper.KEY_CODE);
+                int codeId = cursor.getColumnIndex(DBHelper.KEY_ID);
+                int codeWeight = cursor.getColumnIndex(DBHelper.KEY_WEIGHT);
+                int codeHeight = cursor.getColumnIndex(DBHelper.KEY_HEIGHT);
                 do {
                     SignInIntent.putExtra("email", cursor.getString(emailIndex));
                     SignInIntent.putExtra("code", cursor.getString(codeIndex));
+                    SignInIntent.putExtra("id", cursor.getString(codeId));
                     Log.d("mLog",  "Email = " + cursor.getString(emailIndex) +
-                            ", code = " + cursor.getString(codeIndex));
+                            ", code = " + cursor.getString(codeIndex)+
+                            ", id = " + cursor.getString(codeId) +
+                            ", weight = " + cursor.getString(codeWeight) +
+                            ", height = " + cursor.getString(codeHeight));
                 } while (cursor.moveToNext());
             } else
                 Log.d("mlog", "0 rows");

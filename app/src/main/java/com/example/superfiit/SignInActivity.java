@@ -13,7 +13,7 @@ public class SignInActivity extends AppCompatActivity {
 
     private TextView txtEmail;
     private GridView gridNumbers;
-    private  String code;
+    private  String code, id;
     private ArrayList<String> numbers = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +23,7 @@ public class SignInActivity extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
         if(bundle != null){
             String email = bundle.getString("email");
+            id = bundle.getString("id");
             code = bundle.getString("code");
             txtEmail.setText(email);
         }
@@ -36,8 +37,8 @@ public class SignInActivity extends AppCompatActivity {
         numbers.add("8");
         numbers.add("9");
         gridNumbers = findViewById(R.id.gridNumbers);
-//        ArrayAdapter arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, numbers);
-        CustomAdapter customAdapter = new CustomAdapter(numbers, this, code);
+
+        CustomAdapter customAdapter = new CustomAdapter(numbers, this, code, id);
         gridNumbers.setAdapter(customAdapter);
     }
 }

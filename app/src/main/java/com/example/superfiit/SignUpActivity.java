@@ -67,6 +67,7 @@ public class SignUpActivity extends AppCompatActivity {
             SQLiteDatabase database = dbHelper.getWritableDatabase();
             ContentValues contentValues = new ContentValues();
 
+
             contentValues.put(DBHelper.KEY_NAME, name);
             contentValues.put(DBHelper.KEY_MAIL, email);
             contentValues.put(DBHelper.KEY_CODE, code);
@@ -88,9 +89,7 @@ public class SignUpActivity extends AppCompatActivity {
                 Log.d("mlog", "0 rows");
             cursor.close();
             dbHelper.close();
-
-
-              startActivity(BackToSignIn);
+            startActivity(BackToSignIn);
         }
 //        Intent BackToSignIn = new Intent(this, HomeActivity.class);
 //        startActivity(BackToSignIn);

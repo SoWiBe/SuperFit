@@ -20,15 +20,17 @@ public class CustomAdapter extends BaseAdapter {
     private ArrayList<String> numbers;
     private LayoutInflater layoutInflater;
     private Context context;
+    private String id;
 
     private String code, createCode = "";
     private int countClicks = 4;
 
-    public CustomAdapter(ArrayList<String> numbers, Context context, String code) {
+    public CustomAdapter(ArrayList<String> numbers, Context context, String code, String id) {
         this.numbers = numbers;
         this.layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         this.context = context;
         this.code = code;
+        this.id = id;
     }
 
     @Override
@@ -64,6 +66,7 @@ public class CustomAdapter extends BaseAdapter {
                 if(countClicks == 0){
                     if(code.toLowerCase().equals(createCode)){
                         Intent intent = new Intent(context, HomeActivity.class);
+                        intent.putExtra("id", id);
                         context.startActivity(intent);
                     } else{
                         createCode = "";

@@ -135,8 +135,6 @@ public class RecipeScreen extends AppCompatActivity {
         }
     }
 
-
-
     public void onClickBackRecipes(View view) {
         startActivity(new Intent(this, RecipesActivity.class));
     }
