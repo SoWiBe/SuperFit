@@ -65,12 +65,15 @@ public class MyBodyActivity extends AppCompatActivity {
                 LayoutInflater layoutInflater = getLayoutInflater();
                 View view = layoutInflater.inflate(R.layout.dialog_change_weight, null);
                 builder.setView(view);
+                AlertDialog alertDialog = builder.create();
                 EditText edtNewValueWeight = view.findViewById(R.id.edtWeight);
                 Button btnChange = view.findViewById(R.id.btnChange);
+
                 btnChange.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         weight = edtNewValueWeight.getText().toString();
+                        txtWeight.setText(weight);
                         dbHelper = new DBHelper(MyBodyActivity.this);
                         database = dbHelper.getWritableDatabase();
                         database.execSQL("Update " + DBHelper.TABLE_USERS + " Set " + DBHelper.KEY_WEIGHT + "=" + weight + " Where " + DBHelper.KEY_ID + "=" + id + "");
@@ -90,10 +93,71 @@ public class MyBodyActivity extends AppCompatActivity {
                                 Log.d("mlog", "0 rows");
                             cursor.close();
                             dbHelper.close();
+                            alertDialog.cancel();
                         }
                     }
                 });
+                Button btnCancel = view.findViewById(R.id.btnCancel);
+
+                btnCancel.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        alertDialog.cancel();
+                    }
+                });
+                alertDialog.show();
+            }
+        });
+        txtEditHeight.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(MyBodyActivity.this);
+                LayoutInflater layoutInflater = getLayoutInflater();
+                View view = layoutInflater.inflate(R.layout.dialog_change_weight, null);
+                builder.setView(view);
                 AlertDialog alertDialog = builder.create();
+                EditText edtNewValueHeight= view.findViewById(R.id.edtWeight);
+                TextView stTxtTitle = view.findViewById(R.id.staticTxtTitle);
+                TextView stTxtWeight = view.findViewById(R.id.staticTxtWeight);
+                stTxtTitle.setText("Change your height");
+                stTxtWeight.setText("Height");
+                Button btnChange = view.findViewById(R.id.btnChange);
+                btnChange.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        height = edtNewValueHeight.getText().toString();
+                        txtHeight.setText(height);
+
+                        dbHelper = new DBHelper(MyBodyActivity.this);
+                        database = dbHelper.getWritableDatabase();
+                        database.execSQL("Update " + DBHelper.TABLE_USERS + " Set " + DBHelper.KEY_HEIGHT + "=" + height + " Where " + DBHelper.KEY_ID + "=" + id + "");
+
+                        Cursor cursor = database.rawQuery("Select * From " + DBHelper.TABLE_USERS + " Where " + DBHelper.KEY_ID + "='" + id + "'", null);
+                        if (cursor.getCount() != 0) {
+                            if (cursor.moveToFirst()) {
+                                int codeWeight = cursor.getColumnIndex(DBHelper.KEY_WEIGHT);
+                                int codeHeight = cursor.getColumnIndex(DBHelper.KEY_HEIGHT);
+                                int codeId = cursor.getColumnIndex(DBHelper.KEY_ID);
+                                do {
+                                    txtWeight.setText(cursor.getString(codeWeight));
+                                    Log.d("mLog", "Height = " + cursor.getString(codeHeight) +
+                                            ", Weight = " + cursor.getString(codeWeight) + ", id = " + cursor.getString(codeId));
+                                } while (cursor.moveToNext());
+                            } else
+                                Log.d("mlog", "0 rows");
+                            cursor.close();
+                            dbHelper.close();
+                            alertDialog.cancel();
+                        }
+                    }
+                });
+                Button btnCancel = view.findViewById(R.id.btnCancel);
+                btnCancel.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        alertDialog.cancel();
+                    }
+                });
                 alertDialog.show();
             }
         });

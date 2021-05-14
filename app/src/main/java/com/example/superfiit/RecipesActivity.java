@@ -57,6 +57,7 @@ public class RecipesActivity extends AppCompatActivity {
     private RadioGroup rgButtons;
     private RadioButton rbBalanced, rbHighFiber, rbHighProtein;
     private String typeOfDiet = "balanced";
+    private String id;
 
 
     private HttpURLConnection connection = null;
@@ -66,6 +67,11 @@ public class RecipesActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipes);
 
+
+        Bundle bundle = getIntent().getExtras();
+        if(bundle != null){
+            id = bundle.getString("id");
+        }
 
         recyclerView = findViewById(R.id.recyclerViewRecipes);
         imgRecipeBackToHome = findViewById(R.id.imgRecipeBackToHome);
@@ -85,7 +91,7 @@ public class RecipesActivity extends AppCompatActivity {
 
         recipesElements = new ArrayList<>();
         ingredientsList = new ArrayList<>();
-        myRecyclerAdapter = new MyRecyclerAdapter(RecipesActivity.this, recipesElements);
+        myRecyclerAdapter = new MyRecyclerAdapter(RecipesActivity.this, recipesElements, id);
 
 
 
@@ -113,13 +119,11 @@ public class RecipesActivity extends AppCompatActivity {
             }
         });
 
-
-
-
         imgRecipeBackToHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(RecipesActivity.this, HomeActivity.class);
+                intent.putExtra("id", id);
                 startActivity(intent);
             }
         });

@@ -65,7 +65,7 @@
                     android:fontFamily="@font/montserratbold"
                     android:text="76"
                     android:textColor="@color/white"
-                    android:textSize="35dp" />
+                    android:textSize="25dp" />
 
                 <TextView
                     android:id="@+id/staticTxtKg"
@@ -76,7 +76,7 @@
                     android:fontFamily="@font/montserratbold"
                     android:text="kg"
                     android:textColor="@color/white"
-                    android:textSize="35dp" />
+                    android:textSize="30dp" />
 
             </LinearLayout>
 
@@ -118,7 +118,7 @@
                     android:fontFamily="@font/montserratbold"
                     android:text="178"
                     android:textColor="@color/white"
-                    android:textSize="35dp" />
+                    android:textSize="25dp" />
 
                 <TextView
                     android:id="@+id/staticTxtCm"
@@ -128,7 +128,7 @@
                     android:fontFamily="@font/montserratbold"
                     android:text="cm"
                     android:textColor="@color/white"
-                    android:textSize="35dp" />
+                    android:textSize="30dp" />
 
             </LinearLayout>
 

@@ -25,13 +25,14 @@ import java.util.Collection;
 public class MyRecyclerAdapter  extends RecyclerView.Adapter<MyRecyclerAdapter.MyViewHolder> implements Filterable {
 
     private ArrayList<RecipesElement> recipesElements;
-
+    private String id;
     private ArrayList<RecipesElement> recipesElementsFull;
     private Context context;
-    public MyRecyclerAdapter(Context context, ArrayList<RecipesElement> recipesElements){
+    public MyRecyclerAdapter(Context context, ArrayList<RecipesElement> recipesElements, String id){
         this.context = context;
         this.recipesElements = recipesElements;
         recipesElementsFull = new ArrayList<>(recipesElements );
+        this.id = id;
     }
 
     @NonNull
@@ -57,6 +58,7 @@ public class MyRecyclerAdapter  extends RecyclerView.Adapter<MyRecyclerAdapter.M
             public void onClick(View v) {
                 Intent intent = new Intent(context, RecipeScreen.class);
                 intent.putExtra("recipe", recipesElement);
+                intent.putExtra("id", id);
                 context.startActivity(intent);
             }
         });

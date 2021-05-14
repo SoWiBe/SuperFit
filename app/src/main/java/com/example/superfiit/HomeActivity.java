@@ -25,6 +25,7 @@ public class HomeActivity extends AppCompatActivity {
     private DBHelper dbHelper;
     private SQLiteDatabase database;
     private String id, weight, height;
+    private TextView txtKg, txtCm;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +37,9 @@ public class HomeActivity extends AppCompatActivity {
         llDetails = findViewById(R.id.llDetailsClick);
         txtHeightHome = findViewById(R.id.txtHeightHome);
         txtWeightHome = findViewById(R.id.txtWeightHome);
+
+        txtKg = findViewById(R.id.staticTxtKg);
+        txtCm = findViewById(R.id.staticTxtCm);
         if(bundle!=null){
             dbHelper = new DBHelper(HomeActivity.this);
             database = dbHelper.getWritableDatabase();
@@ -47,14 +51,21 @@ public class HomeActivity extends AppCompatActivity {
             if(cursor.getCount()!=0){
                 if(cursor.moveToFirst()){
                     int codeWeight = cursor.getColumnIndex(DBHelper.KEY_WEIGHT);
+                    int codeHeight = cursor.getColumnIndex(DBHelper.KEY_HEIGHT);
                     do{
                         weight = cursor.getString(codeWeight);
+                        height = cursor.getString(codeHeight);
                         txtWeightHome.setText(weight);
+                        txtHeightHome.setText(height);
                         if(weight == null){
                             weight ="Undefined";
-
+                            txtKg.setVisibility(View.INVISIBLE);
                             txtWeightHome.setText(weight);
-
+                        }
+                        if(height == null){
+                            height ="Undefined";
+                            txtCm.setVisibility(View.INVISIBLE);
+                            txtHeightHome.setText(height);
                         }
                     } while (cursor.moveToNext());
                 }
@@ -71,7 +82,9 @@ public class HomeActivity extends AppCompatActivity {
         txtSeeAll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(HomeActivity.this, SeeAllActivity.class));
+                Intent intent =new Intent(HomeActivity.this, SeeAllActivity.class);
+                intent.putExtra("id", id);
+                startActivity(intent);
             }
         });
 
@@ -97,8 +110,9 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     public void onClickToRecipes(View view) {
-        Intent ClickSignOut = new Intent(this, RecipesActivity.class);
-        startActivity(ClickSignOut);
+        Intent goToRecipes = new Intent(this, RecipesActivity.class);
+        goToRecipes.putExtra("id", id);
+        startActivity(goToRecipes);
     }
 
     public void onClickBackRecipes(View view) {

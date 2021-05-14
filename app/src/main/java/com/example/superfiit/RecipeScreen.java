@@ -39,6 +39,7 @@ public class RecipeScreen extends AppCompatActivity {
     private IngredientAdapter ingredientAdapter;
     private ListView lvIngredients;
     private ImageView imgBackContent;
+    private String id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +57,7 @@ public class RecipeScreen extends AppCompatActivity {
 
         if(bundle != null){
             recipesElement = (RecipesElement) bundle.getSerializable("recipe");
+            id = bundle.getString("id");
             txtKcal.setText(recipesElement.getKcal());
             txtAllImpact.setText(recipesElement.getProtein() + " • " + recipesElement.getFat() + " • " + recipesElement.getCards());
             txtTitle.setText(recipesElement.getName());
@@ -136,6 +138,8 @@ public class RecipeScreen extends AppCompatActivity {
     }
 
     public void onClickBackRecipes(View view) {
-        startActivity(new Intent(this, RecipesActivity.class));
+        Intent intent = new Intent(this, RecipesActivity.class);
+        intent.putExtra("id", id);
+        startActivity(intent);
     }
 }
