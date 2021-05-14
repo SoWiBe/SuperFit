@@ -27,7 +27,6 @@ public class PlankActivity extends AppCompatActivity {
                 new CountDownTimer(5000, 950){
                     @Override
                     public void onTick(long millisUntilFinished) {
-
                         txtStart.setText("Готовьтесь..." + millisUntilFinished / 1000);
                     }
 
